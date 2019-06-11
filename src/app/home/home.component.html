@@ -1,0 +1,47 @@
+<div *ngIf="this.user">
+  <div class="home-page">
+    <div class="banner" >
+      <div class="container">
+        <h1 class="logo-font">Social media</h1>
+        <p>Created with <i>Angular 7</i></p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="feed-toggle">
+        <ul class="nav nav-pills outline-active">
+          <li class="nav-item">
+            <a class="nav-link"
+            routerLink="/global-feed" routerLinkActive="active-link">
+            Global feed
+          </a>
+        </li>
+
+        <div *ngIf="this.user.id; else notLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/your-feed" routerLinkActive="active-link">Your feed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/your-favorites" routerLinkActive="active-link">Your favorites</a>
+          </li>
+        </div>
+
+        <ng-template #notLoggedIn>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active-link">Your feed</a>
+            <br>
+          </li>
+        </ng-template>
+
+        <li class="nav-item" *ngIf="page">
+          <a class="nav-link" routerLink="/tag-search/" routerLinkActive="active-link">
+            <i class="fas fa-hashtag"></i> {{this.searchTag}}
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>
+</div>

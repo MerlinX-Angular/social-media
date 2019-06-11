@@ -1,0 +1,63 @@
+<h2 style="text-align:center;">Create new post</h2>
+<div class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+        <form [formGroup]="postForm">
+          <fieldset class="form-group">
+            <input class="form-control form-control-lg"
+            [ngClass]="{ 'is-invalid': submitted && this.postForm.controls.title.errors }"
+            formControlName="title"
+            type="text"
+            placeholder="Post Title" />
+            <div *ngIf="submitted && this.postForm.controls.title.errors" class="invalid-feedback">
+              <div *ngIf="this.postForm.controls.title.errors.required">Title is required</div>
+              <div *ngIf="this.postForm.controls.title.errors.minlength">Title must be at least 3 characters</div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <input class="form-control"
+            formControlName="description"
+            type="text"
+            placeholder="Post description" />
+          </fieldset>
+
+          <fieldset class="form-group">
+            <textarea class="form-control"
+            formControlName="body"
+            rows="8"
+            placeholder="Post body"
+            [ngClass]="{ 'is-invalid': submitted && this.postForm.controls.body.errors }">
+          </textarea>
+          <div *ngIf="submitted && this.postForm.controls.body.errors" class="invalid-feedback">
+            <div *ngIf="this.postForm.controls.body.errors.required">Post body is required</div>
+          </div>
+        </fieldset>
+        Max tag count: <b>4</b>
+        <br>
+        Max characters for tag: <b>10</b>
+        <br><br>
+        <fieldset class="form-group">
+          Enter new Tags (press enter to add new tag):<input class="form-control"
+          type="text"
+          placeholder="Enter post tags"
+          [formControl]="tagField"
+          (keyup.enter)="addTag()" />
+          <div class="tag-list">
+            <div *ngFor="let newTagsAdded of this.newTags;let i=index">
+              <button class="btn btn-secondary">{{newTagsAdded}}</button> <button (click)="removeTagFromNewlyAdded(i)">X</button>
+            </div>
+          </div>
+        </fieldset>
+
+      </form>
+
+      <div class="form-group ">
+        <button type="submit" (click)="submitNewPost()" class="btn btn-dark btn-lg btn-block login-button">Register</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

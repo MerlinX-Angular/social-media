@@ -1,0 +1,10 @@
+<button
+  class="btn btn-sm action-btn"
+  [ngClass]="{
+               'btn-outline-secondary': !postAuthorFollow,
+               'btn-secondary': postAuthorFollow }"
+               (click)="toggleFollowing()">
+  <i class="fas fa-plus"></i>
+  &nbsp;
+  {{ postAuthorFollow ? 'Unfollow' : 'Follow' }} {{ username }}
+</button>

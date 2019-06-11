@@ -1,0 +1,70 @@
+<h2 style="text-align:center;">Edit post</h2>
+<div class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+        <form [formGroup]="postForm">
+          <fieldset class="form-group">
+            <input class="form-control form-control-lg"
+            [ngClass]="{ 'is-invalid': submitted && this.postForm.controls.title.errors }"
+            formControlName="title"
+            type="text"
+            placeholder="Post Title" />
+            <div *ngIf="submitted && this.postForm.controls.title.errors" class="invalid-feedback">
+              <div *ngIf="this.postForm.controls.title.errors.required">Title is required</div>
+              <div *ngIf="this.postForm.controls.title.errors.minlength">Title must be at least 3 characters</div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <input class="form-control"
+            formControlName="description"
+            type="text"
+            placeholder="Post description" />
+          </fieldset>
+
+          <fieldset class="form-group">
+            <textarea class="form-control"
+            formControlName="body"
+            rows="8"
+            placeholder="Post body"
+            [ngClass]="{ 'is-invalid': submitted && this.postForm.controls.body.errors }">
+          </textarea>
+          <div *ngIf="submitted && this.postForm.controls.body.errors" class="invalid-feedback">
+            <div *ngIf="this.postForm.controls.body.errors.required">Post body is required</div>
+          </div>
+        </fieldset>
+
+        <div *ngIf="(postInfo?.tagList.length > 0)">
+          Max tag count: <b>4</b>
+          <br>
+          Max characters for tag: <b>10</b>
+          <br><br>
+          Old Tags:
+          <div *ngFor="let oldTags of postInfo?.tagList;let i=index">
+            <button class="btn btn-secondary">{{oldTags}}</button> <button (click)="removeTagFromOldTags(i)">X</button>
+          </div>
+        </div>
+
+        <div *ngIf="(addedTags.length > 0)">
+          New Tags:
+          <div *ngFor="let newTagsAdded of addedTags;let i=index">
+            <button class="btn btn-secondary">{{newTagsAdded}}</button> <button (click)="removeTagFromNewlyAdded(i)">X</button>
+          </div>
+        </div>
+
+        Enter new Tags (press enter to add new tag): <input class="form-control"
+        type="text"
+        placeholder="Enter tags"
+        [formControl]="tagField"
+        (keyup.enter)="addTag()" />
+        <br>
+      </form>
+      <div class="form-group ">
+        <button type="submit" class="btn btn-dark btn-lg btn-block login-button" (click)="submitNewPost()">Submit edited post</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

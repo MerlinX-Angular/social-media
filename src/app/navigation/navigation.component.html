@@ -1,0 +1,23 @@
+<ng-container>
+  <div class="d-flex flex-column flex-md-row align-items-center px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <a href="/global-feed/1" >  <img class="my-0 mr-md-auto font-weight-normal" [src]='"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMsAAABoCAMAAABorfRBAAAAY1BMVEX///8kJCSZmZnFxcVeXl4zMzPw8PDi4uLT09NQUFBBQUGnp6dtbW22trZ8fHyKiootLS2zs7NoaGh1dXWHh4dMTEzk5OTb29v5+fkuLi6hoaF4eHitra2Ojo5YWFg3Nze/v7+34f8vAAADw0lEQVR4nO2a6XabMBBG0YoQQsSxG3fJ4vd/ys4MQoChNTmhh8Pp3B8OAhx/VysGFwXDMAzDMAzDMAzDMAzDMMx/x1WetT5Lt3eOr3PVIlGpvbN8keZJDFz2TvMlbmLC2955vsCLmbqIq728v4dXu3ewT3J9PRXPdyoidg1l6r3TfYbbN+hR6l5FfCuPN3Qi5j29z1w+bL8l9464lgvFrWcqMGCGrb1DriP1rTBXeTrlzee9U64j9a2nuctHNWwfYjK7zh2WuO2dcw1L42SBn3vnXMNlncshLgLiOpdDzMpv61xue+dcw+mxB/D0fe+ca7CPRYDz3jHXsbBIzpul3DvlOsqFVfKeQ8zIyOMRc6Dr5Ne/t8yPQ31/uY6+hvm2rmsZ86WYubzsHe+TvPz8FZ7D+e2UL+6/3y7hHKU6xGTMMAzDMAzDMI8oJdGUfSl9/YB99CK726kNbKnu5HxclrC3oZLNJ5aT57AOThjdj3W1rIfvzwr/5Zbk5yjadSXd7Yc99CI6Ny/wphedTGHoWYuCV0PFVoiYHPXwvxtfSRlNTDZO+xaKurORJkgZzJZ30kbPhOpFl4pSicGlTeHBpZBCBEwJTnbmUhuqdhsrOlanO4DSYK3FqquTKm7qgp/uAtX4ggu1Qxy5eDzsO5eiolctRFPcuzjRd7eAvqXpT0FD6ZO79du1TE4fsYrnLgbbweLfzsVQ7IY2FL3d2zq/a+wSco2XWB9x0gDDU83ab++Cd/EWXFphCuxKbXLRFfaqICpNLtjZWpNGzdRFDANbQ93nZuk+ddgWm00AQ3oI5+YuDtsB8sveBTYseMvkYk3X/WYubhRXhklxOkPozTrZxEXNXdADfbILeqBPcqFpoVpIOa562NkVa1oA1D93geFsF1wgt4Z+ll2gf3kP/ax3weFP3UfSdJBTlqMHfW1MRXKB0V6P7KvNbqjl9DiKcdnwKQluoIvt5uHBhebnZnDpN+5cxgOkmowXaAg3iFqx2a+cehdHExU2DjV5oMWPGgdnazdyKeBMU8xdSgXYwSXq4TNgamhzETvVMBPLTecxD+0eUq/HytXQDbrVg1waOjJyaWm9nLmkaDmy7eddi80CxT4+FpVJreHMdtcxw7ofqNnzQzwMQi7QDnLi4rCdHrtATLpGU2lpdybgzO00rfh1Z1pv+fOZ5OJjn0dFaJSqpQWjc2mxc49ciqoq/uySqgJ3lXDxpX0e21aaSnufLkJVgIMmHOhHdE5NfrZQqvFjJnUgEYZhGIZhGIZhGIZhGIZhmDt+A34AGXz6ZiZZAAAAAElFTkSuQmCC"'/>
+</a>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-8 text-dark" routerLink="/global-feed">Home</a>
+    <a *ngIf="isLoggedIn|async" class="p-2 text-dark" routerLink="/new-post">New Post</a>
+    <div *ngIf="isLoggedIn|async" class="btn-group">
+  <button type="button" style="margin-left:10px" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{user?.email}}
+  </button>
+  <div class="dropdown-menu" style="font-style: italic;font-family: inherit;">
+    <a *ngIf="isLoggedIn|async" class="p-2 text-dark dropdown-item" [routerLink]="['/user/',user.id]">My profile</a>
+    <a *ngIf="isLoggedIn|async" class="p-2 text-dark dropdown-item" routerLink="/settings">Settings</a>
+    <div class="dropdown-divider"></div>
+    <a *ngIf="isLoggedIn|async" class="p-2 text-dark dropdown-item" (click)="logout()" routerLink="/global-feed">Log out</a>
+  </div>
+</div>
+<a *ngIf="isLoggedOut|async"class="btn btn-outline-info" routerLink="/login">Log in</a>
+<a *ngIf="isLoggedOut|async" class="btn btn-outline-primary" style="margin-left: 10px;" routerLink="/register">Sign Up</a>
+  </nav>
+</div>
+</ng-container>

@@ -1,0 +1,101 @@
+<div *ngIf="post">
+  <div class="post-page">
+    <div class="banner">
+      <div class="container">
+        <h1>{{ post.title }}</h1>
+        <div class="post-meta">
+          <a [routerLink]="['/user', post.author.id]">
+            <img [src]="post.author.image" />
+          </a>
+
+          <div class="info">
+            <a class="author"
+            [routerLink]="['/user', post.author.id]">
+            {{ post.author.username }}
+          </a>
+          <span class="date">
+            {{ post.createdAt | date: 'longDate' }}
+          </span>
+        </div>
+
+        <span *ngIf="(this.loggedUser.id !== undefined)">
+          <span *ngIf="!(this.canModify)">
+            <app-follow-button
+            [postAuthorFollow]="postAuthorFollow"
+            [author]="this.post.author.id"
+			      [username] = "this.post.author.username">
+          </app-follow-button>
+
+          <app-favorite-button
+          [postFavorite]="postFavorite"
+          [slug]="this.post.slug"
+          class="pull-xs-right">
+        </app-favorite-button>
+      </span>
+
+      <span [hidden]="!canModify">
+        <a class="btn btn-sm btn-outline-secondary"
+        [routerLink]="['/edit', post.slug]">
+        <i class="ion-edit"></i> Edit Post
+      </a>
+
+      <button class="btn btn-sm btn-outline-danger"
+      [ngClass]="{disabled: isDeleting}"
+      (click)="deletePost(post.slug)" routerLink="/global-feed">
+      <i class="ion-trash-a"></i> Delete Post
+    </button>
+
+  </span>
+</span>
+
+</div>
+</div>
+</div>
+
+<div class="container page">
+  <div class="row post-content">
+    <div class="col-md-12">
+      <div [innerHTML]="post.body"></div>
+    </div>
+  </div>
+  <hr />
+
+  <div class="row" *ngIf="this.loggedUser.id">
+    <div class="col-xs-12 col-md-8 offset-md-2">
+      <div>
+        <form class="card comment-form" (ngSubmit)="addComment()">
+          <fieldset>
+            <div class="card-block">
+              <textarea class="form-control"
+              placeholder="Write a comment..."
+              rows="3"
+              [formControl]="commentControl"
+              >
+            </textarea>
+          </div>
+          <div class="card-footer">
+            <img [src]="post.author.image" class="comment-author-img" />
+            <button class="btn btn-sm btn-secondary" type="submit">
+              Post Comment
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <app-post-comment
+    *ngFor="let comment of comments?.comments"
+    [comment]="comment"
+    (deleteComment)="deleteComment($event,post.commentId)">
+  </app-post-comment>
+
+</div>
+</div>
+
+<div class="notLoggedInText" *ngIf="!this.loggedUser.id">
+  <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this post.
+</div>
+
+</div>
+</div>
+</div>

@@ -1,0 +1,7 @@
+<button class="btn btn-sm"
+ [ngClass]="{ 'btn-outline-primary': !postFavorite,
+              'btn-primary': postFavorite }"
+ (click)="toggleFavorite()">
+<i class="fas fa-heart"></i>
+    {{ postFavorite ? 'Unfavorite post' : 'Favorite post' }}
+</button>

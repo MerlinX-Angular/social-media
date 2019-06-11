@@ -1,0 +1,58 @@
+<div class="settings-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">Your Settings</h1>
+        <form [formGroup]="settingsForm">
+          <fieldset>
+            Profile username:  <fieldset class="form-group">
+              <input class="form-control form-control-lg" [readonly]="true"
+              type="text"
+              placeholder="Username"
+              formControlName="username"
+              [ngClass]="{ 'is-invalid': this.settingsForm.controls.username.errors }" />
+              <div *ngIf="this.settingsForm.controls.username.errors" class="invalid-feedback">
+                <div *ngIf="this.settingsForm.controls.username.errors.required">Title is required</div>
+                <div *ngIf="this.settingsForm.controls.username.errors.minlength">Title must be at least 4 characters</div>
+              </div>
+            </fieldset>
+
+            Profile image:  <fieldset class="form-group">
+              <input class="form-control"
+              type="text"
+              placeholder="URL of profile picture"
+              formControlName="image" />
+            </fieldset>
+
+            Bio:  <fieldset class="form-group">
+              <textarea class="form-control form-control-lg"
+              rows="8"
+              placeholder="Short bio about you"
+              formControlName="bio">
+            </textarea>
+          </fieldset>
+
+          Email:  <fieldset class="form-group">
+            <input class="form-control form-control-lg" [readonly]="true"
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+            [ngClass]="{ 'is-invalid': this.settingsForm.controls.email.errors }" />
+            <div *ngIf="this.settingsForm.controls.email.errors" class="invalid-feedback">
+              <div *ngIf="this.settingsForm.controls.email.errors.required">Email is required</div>
+              <div *ngIf="this.settingsForm.controls.email.errors.email">Enter a valid email</div>
+            </div>
+          </fieldset>
+        </fieldset>
+      </form>
+
+      <button class="btn btn-lg btn-dark pull-xs-right"
+      [disabled]="this.settingsForm.invalid"
+      type="submit" (click)="submitForm()" routerLink="/global-feed">
+      Update Settings
+    </button>
+
+  </div>
+</div>
+</div>
+</div>

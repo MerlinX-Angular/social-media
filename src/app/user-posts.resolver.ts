@@ -1,0 +1,17 @@
+import { Injectable } from '@angular/core';
+import {Resolve, ActivatedRouteSnapshot,RouterStateSnapshot} from '@angular/router'
+import { ApiReqService } from './api-req.service';
+
+@Injectable({
+  providedIn:'root'
+})
+export class UserPostsResolver implements Resolve<any> {
+  username:string;
+  constructor(private apiService:ApiReqService) {
+  }
+
+  resolve(route:ActivatedRouteSnapshot, state:RouterStateSnapshot){
+    this.username = state.url.split('/')[2];
+    return  this.apiService.getSelectedUserPosts(this.username);
+  }
+}

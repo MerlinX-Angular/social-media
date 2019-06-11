@@ -1,0 +1,43 @@
+<div *ngIf="this.posts" class="row">
+  <div class="col-md-9">
+    <div class="post-preview" *ngFor="let post of posts | paginate: { itemsPerPage: 5, currentPage: currentPage }">
+      <div class="post-meta">
+        <a [routerLink]="['/user', post.author.id]">
+          <img [src]="post.author.image" />
+        </a>
+
+        <div class="info">
+          <a class="author"
+          [routerLink]="['/user', post.author.id]">
+          {{ post.author.username }}
+        </a>
+        <span class="date">
+          {{ post.createdAt | date: 'longDate' }}
+        </span>
+      </div>
+    </div>
+    <a [routerLink]="['/posts', post.slug]" class="preview-link">
+      <h1>{{ post.title }}</h1>
+      <p>{{ post.description }}</p>
+      <span>Read more...</span>
+      <ul class="tag-list">
+        <li class="tag-default tag-pill tag-outline"
+        *ngFor="let tag of post.tagList">
+        {{ tag }}
+      </li>
+    </ul>
+  </a>
+</div>
+
+<pagination-controls (click)="pageChange(currentPage)" (pageChange)="currentPage = $event"></pagination-controls>
+</div>
+
+<div class="col-md-3">
+  <div class="sidebar">
+    <h2>Popular tags</h2>
+    <div class="tag-default tag-pill" *ngFor="let tag of tagsList">
+      <a [routerLink]="['/tag-search', tag]" class="preview-link"> {{tag}} </a>
+    </div>
+  </div>
+</div>
+</div>
